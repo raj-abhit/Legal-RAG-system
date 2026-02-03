@@ -1,0 +1,10 @@
+__pycache__/
+venv/
+*.pyc
+.env
+legal_vectorstore/
+commands.txt
+demo.py
+add_landmark_cases.py
+.DS_Store
+*.egg-info/

@@ -1,0 +1,390 @@
+
+LANDMARK SUPREME COURT AND HIGH COURT CASES - INDIA
+===================================================
+
+PART I - FUNDAMENTAL RIGHTS CASES
+=================================
+
+1. KESAVANANDA BHARATI v. STATE OF KERALA (1973)
+   Citation: AIR 1973 SC 1461
+   
+   Key Holdings:
+   - Established the "Basic Structure Doctrine" - Parliament cannot amend the Constitution 
+     to alter its basic structure
+   - Basic features include: Supremacy of Constitution, Republican and Democratic form of government,
+     Secular character, Separation of powers, Federal character
+   - This is the most important constitutional case in India
+   - Overruled the Golaknath case partially
+   
+   Impact: Limited Parliament's power to amend fundamental rights; protects core constitutional values
+   
+   Relevant Articles: Article 368 (Amendment of Constitution), Part III (Fundamental Rights)
+
+
+2. MANEKA GANDHI v. UNION OF INDIA (1978)
+   Citation: AIR 1978 SC 597
+   
+   Key Holdings:
+   - Expanded the scope of Article 21 (Right to Life and Personal Liberty)
+   - Right to life includes right to live with human dignity and all aspects that make life meaningful
+   - Procedure established by law must be just, fair and reasonable
+   - Any law depriving personal liberty must pass the test of Article 14 and 19
+   
+   Impact: Transformed Article 21 from a limited right into a comprehensive protection of human rights
+   
+   Relevant Articles: Article 21, Article 14, Article 19
+
+
+3. VISHAKA v. STATE OF RAJASTHAN (1997)
+   Citation: AIR 1997 SC 3011
+   
+   Key Holdings:
+   - Laid down guidelines for prevention of sexual harassment at workplace
+   - Court can legislate when legislature fails to act (judicial legislation)
+   - Right to work in safe environment is part of Article 21
+   
+   Impact: Led to Sexual Harassment of Women at Workplace Act, 2013
+   
+   Relevant Articles: Article 21, Article 14, Article 15, Article 19(1)(g)
+
+
+4. SHREYA SINGHAL v. UNION OF INDIA (2015)
+   Citation: AIR 2015 SC 1523
+   
+   Key Holdings:
+   - Struck down Section 66A of IT Act, 2000 as unconstitutional
+   - Protected freedom of speech and expression on internet
+   - Vague laws violate Article 14 and Article 19(1)(a)
+   
+   Impact: Landmark case for digital rights and free speech online
+   
+   Relevant Articles: Article 19(1)(a), Article 14, Article 21
+
+
+5. K.S. PUTTASWAMY v. UNION OF INDIA (2017) - Right to Privacy Case
+   Citation: (2017) 10 SCC 1
+   
+   Key Holdings:
+   - Right to Privacy is a fundamental right under Article 21
+   - Privacy is intrinsic to life and liberty
+   - Nine-judge bench decision
+   - Overruled MP Sharma and Kharak Singh cases
+   
+   Impact: Foundation for data protection laws; affected Aadhaar implementation
+   
+   Relevant Articles: Article 21, Article 14, Article 19
+
+
+6. NAVTEJ SINGH JOHAR v. UNION OF INDIA (2018) - Section 377 Case
+   Citation: (2018) 10 SCC 1
+   
+   Key Holdings:
+   - Decriminalized consensual homosexual acts between adults
+   - Section 377 IPC violates Articles 14, 15, 19 and 21
+   - Sexual orientation is natural and discrimination based on it is unconstitutional
+   
+   Impact: Historic victory for LGBTQ+ rights in India
+   
+   Relevant Sections: Section 377 IPC
+
+
+7. JOSEPH SHINE v. UNION OF INDIA (2018) - Adultery Case
+   Citation: (2018) 15 SCC 1
+   
+   Key Holdings:
+   - Struck down Section 497 IPC (Adultery) as unconstitutional
+   - Treats women as property of husband - violates dignity
+   - Criminal law cannot be used to regulate matrimonial issues
+   
+   Impact: Decriminalized adultery; recognized women's agency and dignity
+   
+   Relevant Sections: Section 497 IPC
+
+
+PART II - CRIMINAL LAW CASES
+=============================
+
+8. BACHAN SINGH v. STATE OF PUNJAB (1980)
+   Citation: AIR 1980 SC 898
+   
+   Key Holdings:
+   - Death penalty is constitutional but should be imposed only in "rarest of rare cases"
+   - Life imprisonment is the rule; death penalty is the exception
+   - Mitigating and aggravating circumstances must be balanced
+   
+   Impact: Established guidelines for death penalty; still followed today
+   
+   Relevant Sections: Section 302 IPC, Section 354(3) CrPC
+
+
+9. D.K. BASU v. STATE OF WEST BENGAL (1997)
+   Citation: AIR 1997 SC 610
+   
+   Key Holdings:
+   - Laid down 11 requirements for arrest and detention to prevent custodial violence
+   - Right to life includes right against custodial torture
+   - Compensation for custodial death or torture
+   
+   Impact: Landmark case for rights of arrested persons; guidelines incorporated in CrPC
+   
+   Relevant Articles: Article 21, Article 22
+
+
+10. ARNESH KUMAR v. STATE OF BIHAR (2014)
+    Citation: (2014) 8 SCC 273
+    
+    Key Holdings:
+    - Police must not automatically arrest when offense is punishable for less than 7 years
+    - Arrest should not be punitive; liberty is the norm
+    - Strengthened Section 41 and 41A CrPC provisions
+    
+    Impact: Reduced unnecessary arrests; protected personal liberty
+    
+    Relevant Sections: Section 41 CrPC, Section 41A CrPC
+
+
+11. MUKESH v. STATE (NCR OF DELHI) (2017) - Nirbhaya Case
+    Citation: (2017) 6 SCC 1
+    
+    Key Holdings:
+    - Upheld death penalty for all four convicts in Delhi gang rape case
+    - Satisfied "rarest of rare" doctrine
+    - Brutal crimes against women demand exemplary punishment
+    
+    Impact: Led to Criminal Law Amendment Act, 2013; strengthened rape laws
+    
+    Relevant Sections: Section 376 IPC, Section 302 IPC
+
+
+PART III - ARTICLE 21 EXPANSION CASES
+======================================
+
+12. OLGA TELLIS v. BOMBAY MUNICIPAL CORPORATION (1985)
+    Citation: AIR 1986 SC 180
+    
+    Key Holdings:
+    - Right to livelihood is part of right to life under Article 21
+    - Cannot deprive someone of livelihood without following just, fair procedure
+    - Eviction of pavement dwellers requires reasonable notice
+    
+    Impact: Expanded Article 21; protected rights of urban poor
+    
+    Relevant Articles: Article 21, Article 19(1)(e)
+
+
+13. FRANCIS CORALIE MULLIN v. ADMINISTRATOR, UT OF DELHI (1981)
+    Citation: AIR 1981 SC 746
+    
+    Key Holdings:
+    - Right to life includes right to live with human dignity
+    - Prison inmates retain fundamental rights except those taken away by law
+    - Dignity is the core of Article 21
+    
+    Impact: Humanized prison conditions; recognized prisoners' rights
+    
+    Relevant Articles: Article 21
+
+
+14. MOHINI JAIN v. STATE OF KARNATAKA (1992)
+    Citation: AIR 1992 SC 1858
+    
+    Key Holdings:
+    - Right to education is part of right to life under Article 21
+    - Capitation fees for medical education are unconstitutional
+    - Education is essential for human dignity
+    
+    Impact: Led to Article 21A (Right to Education) being added to Constitution
+    
+    Relevant Articles: Article 21, Article 21A (added later)
+
+
+15. MC MEHTA v. STATE OF TAMIL NADU (1996) - Child Labour Case
+    Citation: AIR 1997 SC 699
+    
+    Key Holdings:
+    - Child labour violates Articles 21, 24, and 39
+    - Employers must pay compensation for employing children
+    - State must ensure education and welfare of rescued children
+    
+    Impact: Strengthened enforcement of child labour prohibition
+    
+    Relevant Articles: Article 21, Article 24, Article 39(e)(f)
+
+
+PART IV - EQUALITY AND DISCRIMINATION CASES
+============================================
+
+16. INDRA SAWHNEY v. UNION OF INDIA (1992) - Mandal Commission Case
+    Citation: AIR 1993 SC 477
+    
+    Key Holdings:
+    - Upheld 27% reservation for OBCs in government jobs
+    - Total reservations cannot exceed 50% (except in extraordinary circumstances)
+    - Creamy layer must be excluded from OBC reservations
+    - Reservations not applicable in promotions
+    
+    Impact: Defined reservation policy framework; still governs reservation law
+    
+    Relevant Articles: Article 16(4), Article 15(4)
+
+
+17. STATE OF KERALA v. N.M. THOMAS (1976)
+    Citation: AIR 1976 SC 490
+    
+    Key Holdings:
+    - Equality means equal treatment of equals and unequal treatment of unequals
+    - Compensatory discrimination is not violative of Article 14
+    - Reservations are part of equality, not exception to it
+    
+    Impact: Provided constitutional basis for affirmative action
+    
+    Relevant Articles: Article 14, Article 16
+
+
+PART V - SEPARATION OF POWERS AND CONSTITUTIONAL CASES
+=======================================================
+
+18. RAM JAWAYA KAPUR v. STATE OF PUNJAB (1955)
+    Citation: AIR 1955 SC 549
+    
+    Key Holdings:
+    - Indian Constitution does not have strict separation of powers
+    - Broad separation exists but with checks and balances
+    - Each organ should respect domain of others
+    
+    Impact: Defined Indian constitutional framework of separation of powers
+    
+    Relevant Articles: Articles 50, 121, 211
+
+
+19. S.R. BOMMAI v. UNION OF INDIA (1994)
+    Citation: AIR 1994 SC 1918
+    
+    Key Holdings:
+    - President's Rule under Article 356 is subject to judicial review
+    - Secularism is part of basic structure
+    - Cannot dismiss state government without material evidence
+    
+    Impact: Curbed misuse of Article 356; strengthened federalism
+    
+    Relevant Articles: Article 356, Article 356
+
+
+20. SUPREME COURT ADVOCATES-ON-RECORD ASSOCIATION v. UNION OF INDIA (2015)
+    - NJAC Case
+    Citation: (2015) 5 SCC 1
+    
+    Key Holdings:
+    - Struck down 99th Constitutional Amendment creating NJAC
+    - Primacy of judiciary in judicial appointments is part of basic structure
+    - Independence of judiciary is paramount
+    
+    Impact: Restored Collegium system for judicial appointments
+    
+    Relevant Articles: Articles 124, 217
+
+
+PART VI - ENVIRONMENTAL LAW CASES
+==================================
+
+21. MC MEHTA v. UNION OF INDIA (Multiple cases - Environmental Law)
+    Various Citations (1986-2000)
+    
+    Key Holdings:
+    - Polluter Pays Principle
+    - Precautionary Principle
+    - Sustainable Development
+    - Right to clean environment is part of Article 21
+    
+    Impact: Foundation of environmental jurisprudence in India
+    
+    Relevant Articles: Article 21, Article 48A, Article 51A(g)
+
+
+22. SUBHASH KUMAR v. STATE OF BIHAR (1991)
+    Citation: AIR 1991 SC 420
+    
+    Key Holdings:
+    - Right to pollution-free environment is part of Article 21
+    - Right to clean water is fundamental right
+    - PIL can be filed for environmental protection
+    
+    Impact: Expanded scope of Article 21 to environmental rights
+    
+    Relevant Articles: Article 21
+
+
+PART VII - PUBLIC INTEREST LITIGATION (PIL) CASES
+==================================================
+
+23. S.P. GUPTA v. UNION OF INDIA (1981) - Judges Transfer Case
+    Citation: AIR 1982 SC 149
+    
+    Key Holdings:
+    - Liberalized locus standi for PIL
+    - Any member of public can approach court for public interest
+    - Access to justice is important for rule of law
+    
+    Impact: Opened doors for PIL in India; democratized justice
+    
+    Relevant Articles: Article 32, Article 226
+
+
+24. BANDHUA MUKTI MORCHA v. UNION OF INDIA (1984)
+    Citation: AIR 1984 SC 802
+    
+    Key Holdings:
+    - Bonded labour violates Articles 21 and 23
+    - State has positive obligation to eliminate bonded labour
+    - Courts can issue directions for implementation of laws
+    
+    Impact: Strengthened enforcement against bonded labour
+    
+    Relevant Articles: Article 21, Article 23
+
+
+PART VIII - ADMINISTRATIVE LAW CASES
+=====================================
+
+25. A.K. KRAIPAK v. UNION OF INDIA (1969)
+    Citation: AIR 1970 SC 150
+    
+    Key Holdings:
+    - Principles of natural justice apply unless expressly excluded
+    - Bias vitiates administrative action
+    - Even administrative decisions require fairness
+    
+    Impact: Foundation of administrative law in India
+    
+    Relevant Articles: Article 14
+
+
+26. MANEKA GANDHI v. UNION OF INDIA (Administrative Law Aspect)
+    See Case 2 above - also important for administrative law
+    
+    Key Holdings:
+    - Procedure must be fair, just and reasonable
+    - Article 14 applies to administrative action
+    
+    Impact: Reformed administrative law; fairness is mandatory
+
+
+HOW TO USE THIS DOCUMENT
+=========================
+
+This document contains landmark cases that have shaped Indian constitutional and criminal law.
+When using the RAG system:
+
+1. Ask about specific cases: "What was held in Kesavananda Bharati case?"
+2. Ask about legal principles: "What is the basic structure doctrine?"
+3. Ask about rights: "What cases expanded Article 21?"
+4. Compare cases: "Difference between Maneka Gandhi and ADM Jabalpur?"
+5. Ask about impact: "How did Vishaka case affect workplace laws?"
+
+These cases are frequently cited in courts and are essential for legal research.
+
+DISCLAIMER
+==========
+This is a summary for educational purposes. For authoritative citations and complete 
+judgments, refer to official law reports: Supreme Court Cases (SCC), All India Reporter (AIR),
+or Supreme Court official website.

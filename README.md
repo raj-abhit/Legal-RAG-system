@@ -2,21 +2,21 @@
 
 A Retrieval-Augmented Generation (RAG) system for querying Indian legal documents using Groq's API and LangChain.
 
-## 🌟 Features
+## Features
 
-- **Free & Fast**: Uses Groq's free API for lightning-fast responses
-- **Accurate Retrieval**: Semantic search across legal documents using FAISS
-- **Source Citations**: Answers include relevant document sections
-- **Easy to Use**: Interactive CLI, API server, and simple HTML UI
-- **Extensible**: Add more legal documents easily
+- Free and fast: uses Groq's free API for quick responses
+- Accurate retrieval: semantic search across legal documents using FAISS
+- Source citations: answers include relevant document sections
+- Easy to use: interactive CLI, API server, and simple HTML UI
+- Extensible: add more legal documents easily
 
-## 📋 Prerequisites
+## Prerequisites
 
 - Python 3.8 or higher
-- Groq API key (free at [console.groq.com](https://console.groq.com))
+- Groq API key (free at console.groq.com)
 - Legal documents (TXT or PDF) in the `documents/` folder
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Installation
 
@@ -30,7 +30,7 @@ pip install -r requirements.txt
 
 ### 2. Get Your Groq API Key
 
-1. Visit [console.groq.com](https://console.groq.com)
+1. Visit console.groq.com
 2. Sign up for a free account
 3. Create an API key from the dashboard
 4. Save it securely
@@ -47,7 +47,7 @@ Create a `.env` file:
 GROQ_API_KEY=your_api_key_here
 ```
 
-## 💻 Usage
+## Usage
 
 ### Interactive CLI Mode
 
@@ -62,9 +62,9 @@ This will:
 
 Example session:
 ```
-❓ Your question: What are the fundamental rights in Article 19?
+Your question: What are the fundamental rights in Article 19?
 
-🔍 Searching and analyzing...
+Searching and analyzing...
 
 ANSWER:
 Article 19 of the Constitution of India guarantees six fundamental 
@@ -83,7 +83,13 @@ from legal_rag_system import LegalRAGSystem
 rag = LegalRAGSystem(groq_api_key="your-key-here")
 
 # First time: Load and process documents
-documents = rag.load_documents(["documents/constitution_sample.txt", "documents/ipc_sample.txt"])
+documents = rag.load_documents([
+    "documents/constitution_of_india.pdf",
+    "documents/bns.pdf",
+    "documents/bnss.pdf",
+    "documents/bsa.pdf",
+    "documents/landmark_cases.txt",
+])
 chunks = rag.chunk_documents(documents)
 rag.create_vectorstore(chunks)
 rag.save_vectorstore("legal_vectorstore")
@@ -92,7 +98,7 @@ rag.save_vectorstore("legal_vectorstore")
 rag.setup_qa_chain()
 
 # Query
-result = rag.query("Explain Section 302 of IPC")
+result = rag.query("Explain Section 103 of BNS")
 rag.print_answer(result)
 ```
 
@@ -113,17 +119,17 @@ result = rag.query("What is Article 21?")
 print(result["answer"])
 ```
 
-## 📚 Example Questions
+## Example Questions
 
 Try asking:
 - "What are the fundamental rights guaranteed by the Constitution?"
-- "Explain Section 302 of IPC"
+- "Explain Section 103 of BNS"
 - "What is the difference between Articles 14 and 21?"
-- "What are the punishments for theft under IPC?"
+- "What are the punishments for theft under BNS?"
 - "What is the right to equality?"
-- "Explain culpable homicide vs murder"
+- "Explain culpable homicide vs murder under BNS"
 
-## 🔧 Configuration
+## Configuration
 
 ### Adjust Chunk Size
 
@@ -162,7 +168,7 @@ self.llm = ChatGroq(
 )
 ```
 
-## 🌐 API Server + Simple UI
+## API Server + Simple UI
 
 Run the API server:
 
@@ -170,41 +176,44 @@ Run the API server:
 python api_server.py
 ```
 
-Open [frontend.html](frontend.html) in a browser and query the API.
+Open `frontend.html` in a browser and query the API.
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 legal-rag-system/
-│
-├── legal_rag_system.py          # Main RAG system class
-├── interactive_legal_rag_v2.py  # Interactive CLI
-├── api_server.py                # API server
-├── frontend.html                # Simple web UI
-├── requirements.txt             # Python dependencies
-├── README.md                    # This file
-│
-├── documents/                   # Your legal documents (PDF/TXT)
-│   ├── constitution_sample.txt
-│   └── ipc_sample.txt
-│
-└── legal_vectorstore/          # Generated vector store (auto-created)
-    ├── index.faiss
-    └── index.pkl
+|
+|-- legal_rag_system.py          # Main RAG system class
+|-- interactive_legal_rag_v2.py  # Interactive CLI
+|-- api_server.py                # API server
+|-- frontend.html                # Simple web UI
+|-- requirements.txt             # Python dependencies
+|-- README.md                    # This file
+|
+|-- documents/                   # Your legal documents (PDF/TXT)
+|   |-- constitution_of_india.pdf
+|   |-- bns.pdf
+|   |-- bnss.pdf
+|   |-- bsa.pdf
+|   `-- landmark_cases.txt
+|
+`-- legal_vectorstore/           # Generated vector store (auto-created)
+    |-- index.faiss
+    `-- index.pkl
 ```
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### "No module named 'langchain'"
 ```bash
 pip install -r requirements.txt
 ```
 
-## 🔐 Security Notes
+## Security Notes
 
 - Never commit your `.env` file with API keys
 - Keep your Groq API key private
 
-## ⚖️ Disclaimer
+## Disclaimer
 
 This system is for informational purposes only and does not constitute legal advice. Always consult qualified legal professionals for legal matters.

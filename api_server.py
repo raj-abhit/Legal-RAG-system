@@ -1,376 +1,416 @@
-"""
-Enhanced API Server with Session Management
-Supports conversation memory and improved error handling
-"""
-
-from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect, Header
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, JSONResponse
-from pydantic import BaseModel, validator
-from typing import Optional, Dict
-from datetime import datetime, timedelta
-import asyncio
-import uuid
-import os
-from dotenv import load_dotenv
-
-# Import enhanced RAG system
-from legal_rag_system import LegalRAGSystem
-
-load_dotenv()
-
-app = FastAPI(
-    title="Indian Law Chatbot API",
-    description="Enhanced RAG-powered legal assistant with conversation memory",
-    version="2.5.0"
-)
-
-# CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-# Session management
-sessions: Dict[str, dict] = {}
-SESSION_TIMEOUT = timedelta(hours=2)
-
-# Initialize RAG system
-rag_system = None
-
-@app.on_event("startup")
-async def startup_event():
-    """Initialize RAG system"""
-    global rag_system
-    print("=" * 70)
-    print("🚀 Starting Enhanced Indian Law Chatbot API")
-    print("=" * 70)
-    
-    try:
-        rag_system = LegalRAGSystem()
-        
-        if os.path.exists("legal_vectorstore"):
-            rag_system.load_vectorstore()
-            print("✓ RAG System loaded with conversation memory!")
-        else:
-            print("⚠ No vectorstore found")
-            print("Run: python interactive_legal_rag_v2.py to create it")
-        
-        print("\n" + "=" * 70)
-        print("✓ API Server Ready!")
-        print("=" * 70)
-        print("🌐 Frontend: http://localhost:8000/")
-        print("📖 API Docs: http://localhost:8000/docs")
-        print("💚 Health: http://localhost:8000/health")
-        print("=" * 70 + "\n")
-        
-        # Start cleanup task
-        asyncio.create_task(cleanup_old_sessions())
-        
-    except Exception as e:
-        print(f"\n✗ Error: {str(e)}")
-        print("Check .env file and vectorstore\n")
-
-
-async def cleanup_old_sessions():
-    """Cleanup expired sessions every 30 minutes"""
-    while True:
-        await asyncio.sleep(1800)  # 30 minutes
-        now = datetime.now()
-        expired = [sid for sid, data in sessions.items() 
-                  if now - data['last_activity'] > SESSION_TIMEOUT]
-        for sid in expired:
-            del sessions[sid]
-        if expired:
-            print(f"Cleaned up {len(expired)} expired sessions")
-
-
-def get_or_create_session(session_id: Optional[str] = None) -> str:
-    """Get existing session or create new one"""
-    if session_id and session_id in sessions:
-        # Update last activity
-        sessions[session_id]['last_activity'] = datetime.now()
-        return session_id
-    
-    # Create new session
-    new_session_id = str(uuid.uuid4())
-    sessions[new_session_id] = {
-        'created_at': datetime.now(),
-        'last_activity': datetime.now(),
-        'message_count': 0
-    }
-    return new_session_id
-
-
-# Request/Response Models
-class QueryRequest(BaseModel):
-    question: str
-    research_mode: bool = True
-    session_id: Optional[str] = None
-    
-    @validator('question')
-    def validate_question(cls, v):
-        if not v or not v.strip():
-            raise ValueError('Question cannot be empty')
-        if len(v) > 1000:
-            raise ValueError('Question too long (max 1000 characters)')
-        return v.strip()
-
-
-class QueryResponse(BaseModel):
-    answer: str
-    sources: list
-    question: str
-    session_id: str
-    has_follow_up_context: bool = False
-
-
-class SessionResponse(BaseModel):
-    session_id: str
-    message: str
-
-
-class HealthResponse(BaseModel):
-    status: str
-    rag_loaded: bool
-    active_sessions: int
-    vectorstore_exists: bool
-    message: str
-
-
-# Routes
-@app.get("/", response_class=FileResponse)
-async def serve_frontend():
-    """Serve frontend"""
-    if os.path.exists("frontend.html"):
-        return FileResponse("frontend.html")
-    return {"error": "frontend.html not found"}
-
-
-@app.get("/health", response_model=HealthResponse)
-async def health_check():
-    """Health check with session info"""
-    vectorstore_exists = os.path.exists("legal_vectorstore")
-    rag_loaded = rag_system is not None and rag_system.vectorstore is not None
-    
-    return {
-        "status": "healthy" if rag_loaded else "degraded",
-        "rag_loaded": rag_loaded,
-        "active_sessions": len(sessions),
-        "vectorstore_exists": vectorstore_exists,
-        "message": "System ready!" if rag_loaded else "RAG system not loaded"
-    }
-
-
-@app.post("/api/session/start", response_model=SessionResponse)
-async def start_session():
-    """Start a new conversation session"""
-    session_id = get_or_create_session()
-    return {
-        "session_id": session_id,
-        "message": "Session created successfully"
-    }
-
-
-@app.post("/api/session/clear")
-async def clear_session(session_id: str):
-    """Clear conversation history for a session"""
-    if not rag_system:
-        raise HTTPException(503, "RAG system not initialized")
-    
-    if session_id in sessions:
-        # Clear RAG system memory
-        # Note: This clears global memory. For true multi-user,
-        # you'd need separate RAG instances per session
-        rag_system.clear_conversation()
-        sessions[session_id]['last_activity'] = datetime.now()
-        return {"message": "Conversation cleared", "session_id": session_id}
-    
-    raise HTTPException(404, "Session not found")
-
-
-@app.post("/api/query", response_model=QueryResponse)
-async def query_legal_system(
-    request: QueryRequest,
-    x_session_id: Optional[str] = Header(None)
-):
-    """Query with conversation memory"""
-    if not rag_system or not rag_system.vectorstore:
-        raise HTTPException(
-            status_code=503,
-            detail="RAG system not initialized. Check /health for status."
-        )
-    
-    try:
-        # Get or create session
-        session_id = get_or_create_session(request.session_id or x_session_id)
-        
-        # Update session
-        sessions[session_id]['message_count'] += 1
-        sessions[session_id]['last_activity'] = datetime.now()
-        
-        # Query with memory
-        result = rag_system.query(request.question)
-        
-        # Check if error occurred
-        if result.get('error'):
-            raise HTTPException(400, result['answer'])
-        
-        # Check if it was a follow-up
-        is_follow_up = rag_system.memory.is_follow_up(request.question)
-        
-        return QueryResponse(
-            answer=result['answer'],
-            sources=result.get('sources', []),
-            question=request.question,
-            session_id=session_id,
-            has_follow_up_context=is_follow_up
-        )
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Error processing query: {str(e)}"
-        )
-
-
-@app.websocket("/ws/chat")
-async def websocket_chat(websocket: WebSocket):
-    """WebSocket endpoint with session support"""
-    await websocket.accept()
-    
-    if not rag_system or not rag_system.vectorstore:
-        await websocket.send_json({
-            "type": "error",
-            "message": "RAG system not initialized"
-        })
-        await websocket.close()
-        return
-    
-    # Create session for this WebSocket
-    session_id = get_or_create_session()
-    
-    try:
-        await websocket.send_json({
-            "type": "session",
-            "session_id": session_id,
-            "message": "Connected"
-        })
-        
-        while True:
-            data = await websocket.receive_json()
-            question = data.get("question", "")
-            
-            if not question:
-                await websocket.send_json({
-                    "type": "error",
-                    "message": "No question provided"
-                })
-                continue
-            
-            # Send thinking status
-            await websocket.send_json({
-                "type": "status",
-                "message": "Searching documents..."
-            })
-            
-            try:
-                # Query with memory
-                result = rag_system.query(question)
-                
-                if result.get('error'):
-                    await websocket.send_json({
-                        "type": "error",
-                        "message": result['answer']
-                    })
-                else:
-                    await websocket.send_json({
-                        "type": "answer",
-                        "answer": result['answer'],
-                        "sources": result.get('sources', []),
-                        "question": question,
-                        "session_id": session_id
-                    })
-                
-            except Exception as e:
-                await websocket.send_json({
-                    "type": "error",
-                    "message": f"Error: {str(e)}"
-                })
-                
-    except WebSocketDisconnect:
-        print(f"WebSocket disconnected: {session_id}")
-    except Exception as e:
-        print(f"WebSocket error: {str(e)}")
-        await websocket.close()
-
-
-@app.get("/api/session/{session_id}/stats")
-async def get_session_stats(session_id: str):
-    """Get session statistics"""
-    if session_id not in sessions:
-        raise HTTPException(404, "Session not found")
-    
-    session = sessions[session_id]
-    return {
-        "session_id": session_id,
-        "created_at": session['created_at'].isoformat(),
-        "last_activity": session['last_activity'].isoformat(),
-        "message_count": session['message_count'],
-        "conversation_length": len(rag_system.memory.history) if rag_system else 0
-    }
-
-
-@app.get("/api/suggestions")
-async def get_suggestions():
-    """Get suggested queries"""
-    return {
-        "suggestions": [
-            {
-                "icon": "summarize",
-                "text": "Kesavananda Bharati case",
-                "query": "What is the Kesavananda Bharati case about?"
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Legal Research Assistant | Indian Law Database</title>
+    <meta name="description" content="AI-powered legal research system for Constitution of India, BNS, BNSS, BSA, and Supreme Court judgments">
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0b50da",
+                        "primary-hover": "#0a45bd",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#101622",
+                        "surface-dark": "#1e293b",
+                        "border-dark": "#2d3748",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                },
             },
-            {
-                "icon": "gavel",
-                "text": "Bail under BNSS",
-                "query": "What are the bail provisions under BNSS 2023?"
-            },
-            {
-                "icon": "security",
-                "text": "Article 21",
-                "query": "Explain Article 21 of the Constitution"
-            },
-            {
-                "icon": "update",
-                "text": "New criminal codes",
-                "query": "What changed with BNS, BNSS, and BSA?"
+        }
+    </script>
+    <style>
+        .dark ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #101622;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .message {
+            animation: fadeIn 0.3s ease-out;
+        }
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #1e293b;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 h-screen overflow-hidden flex selection:bg-primary/30 selection:text-white">
+
+<aside class="w-72 bg-[#0d121c] border-r border-slate-800 flex flex-col h-full shrink-0 transition-all duration-300 hidden md:flex">
+    <div class="p-4 border-b border-slate-800">
+        <div class="flex items-center gap-3 p-2 rounded-lg">
+            <div class="size-9 rounded-full bg-gradient-to-br from-primary to-primary-hover flex items-center justify-center shadow-lg">
+                <span class="material-symbols-outlined text-white text-sm">gavel</span>
+            </div>
+            <div class="flex flex-col overflow-hidden">
+                <p class="text-white text-sm font-medium truncate">Legal Research</p>
+                <p class="text-slate-500 text-xs truncate">AI-Powered System</p>
+            </div>
+        </div>
+    </div>
+    <div class="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-4">
+        <div class="flex flex-col gap-2">
+            <p class="px-2 text-xs font-semibold text-slate-500 uppercase tracking-wider">Session Info</p>
+            <div class="bg-[#1e293b]/50 rounded-lg p-3 border border-slate-700/50">
+                <p class="text-slate-400 text-xs">Queries: <span id="message-count" class="text-white font-medium">0</span></p>
+                <p class="text-slate-400 text-xs mt-1">Status: <span id="context-status" class="text-green-400 font-medium">Active</span></p>
+            </div>
+        </div>
+        
+        <div class="flex flex-col gap-2">
+            <p class="px-2 text-xs font-semibold text-slate-500 uppercase tracking-wider">Actions</p>
+            <button onclick="clearConversation()" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-slate-800/50 border border-slate-700 hover:bg-slate-800 group transition-colors">
+                <span class="material-symbols-outlined text-slate-400 group-hover:text-white" style="font-size: 20px;">refresh</span>
+                <p class="text-slate-400 group-hover:text-white text-sm font-medium">New Session</p>
+            </button>
+        </div>
+        
+        <div class="mt-auto p-4 bg-slate-800/30 rounded-lg border border-slate-700/50">
+            <p class="text-slate-500 text-[10px] leading-relaxed">
+                AI-generated information is for research purposes only and does not constitute legal advice. Consult a qualified legal professional for specific legal matters.
+            </p>
+        </div>
+    </div>
+</aside>
+
+<main class="flex-1 flex flex-col relative h-full">
+    <div class="h-16 hidden md:flex items-center justify-between px-8 border-b border-slate-800/50 bg-background-dark/50 backdrop-blur-sm sticky top-0 z-10">
+        <div class="flex items-center gap-3">
+            <h2 class="text-slate-200 font-semibold text-lg">Legal Research Assistant</h2>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-primary/20 text-primary border border-primary/30 uppercase tracking-wide">RAG System</span>
+            <span id="connection-status" class="px-2 py-0.5 rounded text-[10px] font-medium bg-green-500/20 text-green-400 border border-green-500/30">● Connected</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <button onclick="clearConversation()" class="text-slate-400 hover:text-white transition-colors" title="New Session">
+                <span class="material-symbols-outlined">refresh</span>
+            </button>
+        </div>
+    </div>
+
+    <div id="chat-container" class="flex-1 overflow-y-auto flex flex-col p-4 min-h-0 w-full max-w-5xl mx-auto scroll-smooth">
+        <div id="welcome-screen" class="flex flex-col items-center justify-center text-center max-w-2xl mx-auto my-auto">
+            <div class="mb-8 p-4 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 shadow-2xl shadow-black/50 border border-slate-700 relative group">
+                <div class="absolute inset-0 bg-primary/20 blur-xl rounded-full opacity-0 group-hover:opacity-50 transition-opacity duration-700"></div>
+                <span class="material-symbols-outlined text-primary text-6xl relative z-10">gavel</span>
+            </div>
+            
+            <h1 class="text-white text-3xl md:text-4xl font-bold tracking-tight mb-3">
+                Indian Legal Research Assistant
+            </h1>
+            
+            <p class="text-slate-400 text-base mb-10 font-light leading-relaxed max-w-xl">
+                Advanced AI-powered legal research system providing accurate information and citations from the Constitution of India, Bharatiya Nyaya Sanhita (BNS), Bharatiya Nagarik Suraksha Sanhita (BNSS), Bharatiya Sakshya Adhiniyam (BSA), and landmark Supreme Court judgments.
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-3 w-full">
+                <button onclick="askQuestion('What is the Kesavananda Bharati case about?')" class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#1e293b] border border-slate-700 hover:border-primary/50 hover:bg-[#26334d] transition-all group">
+                    <span class="material-symbols-outlined text-primary text-sm">summarize</span>
+                    <span class="text-slate-300 text-sm font-medium group-hover:text-white">Constitutional Law</span>
+                </button>
+                <button onclick="askQuestion('What are the bail provisions under BNSS 2023?')" class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#1e293b] border border-slate-700 hover:border-primary/50 hover:bg-[#26334d] transition-all group">
+                    <span class="material-symbols-outlined text-primary text-sm">gavel</span>
+                    <span class="text-slate-300 text-sm font-medium group-hover:text-white">Criminal Procedure</span>
+                </button>
+                <button onclick="askQuestion('Explain Article 21 of the Constitution')" class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#1e293b] border border-slate-700 hover:border-primary/50 hover:bg-[#26334d] transition-all group">
+                    <span class="material-symbols-outlined text-primary text-sm">security</span>
+                    <span class="text-slate-300 text-sm font-medium group-hover:text-white">Fundamental Rights</span>
+                </button>
+                <button onclick="askQuestion('What changed with BNS, BNSS, and BSA?')" class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#1e293b] border border-slate-700 hover:border-primary/50 hover:bg-[#26334d] transition-all group">
+                    <span class="material-symbols-outlined text-primary text-sm">update</span>
+                    <span class="text-slate-300 text-sm font-medium group-hover:text-white">Recent Reforms</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="messages" class="hidden flex-col gap-6 w-full max-w-4xl mx-auto"></div>
+    </div>
+
+    <div class="w-full px-4 pb-6 pt-2">
+        <div class="max-w-4xl mx-auto flex flex-col gap-2">
+            <div class="relative bg-[#1e293b] rounded-2xl border border-slate-700 shadow-xl shadow-black/20 focus-within:ring-2 focus-within:ring-primary/50 focus-within:border-primary transition-all duration-300">
+                <textarea 
+                    id="question-input"
+                    class="w-full bg-transparent text-white placeholder-slate-500 text-base p-4 min-h-[60px] max-h-[200px] resize-none focus:outline-none rounded-t-2xl" 
+                    placeholder="Enter your legal research query..." 
+                    rows="1"
+                    onkeypress="handleKeyPress(event)"
+                    maxlength="1000"
+                ></textarea>
+                <div class="flex items-center justify-between px-3 pb-3 pt-1">
+                    <div class="flex items-center gap-2 text-xs text-slate-500">
+                        <span class="material-symbols-outlined" style="font-size: 14px;">info</span>
+                        <span>RAG-powered search enabled</span>
+                    </div>
+                    <button onclick="sendQuestion()" id="send-button" class="flex items-center justify-center p-2 size-10 bg-primary hover:bg-primary-hover text-white rounded-xl shadow-lg shadow-primary/30 transition-all hover:scale-105 active:scale-95">
+                        <span class="material-symbols-outlined text-[20px]">send</span>
+                    </button>
+                </div>
+            </div>
+            <p class="text-center text-xs text-slate-600 dark:text-slate-500">
+                <span id="char-count">0</span>/1000 characters • AI-generated results for research purposes only
+            </p>
+        </div>
+    </div>
+</main>
+
+<script>
+    const API_BASE = 'http://localhost:8000/api';
+    let sessionId = null;
+    let messageCount = 0;
+    
+    async function initSession() {
+        try {
+            const response = await fetch(`${API_BASE}/session/start`, { method: 'POST' });
+            const data = await response.json();
+            sessionId = data.session_id;
+        } catch (error) {
+            console.error('Session init failed:', error);
+        }
+    }
+    
+    async function checkHealth() {
+        try {
+            const response = await fetch(`${API_BASE}/../health`);
+            const data = await response.json();
+            const status = document.getElementById('connection-status');
+            
+            if (data.rag_loaded) {
+                status.textContent = '● Connected';
+                status.className = 'px-2 py-0.5 rounded text-[10px] font-medium bg-green-500/20 text-green-400 border border-green-500/30';
+            } else {
+                status.textContent = '● Initializing';
+                status.className = 'px-2 py-0.5 rounded text-[10px] font-medium bg-yellow-500/20 text-yellow-400 border border-yellow-500/30';
             }
-        ]
+        } catch (error) {
+            const status = document.getElementById('connection-status');
+            status.textContent = '● Offline';
+            status.className = 'px-2 py-0.5 rounded text-[10px] font-medium bg-red-500/20 text-red-400 border border-red-500/30';
+        }
     }
+    
+    function showToast(message, duration = 3000) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 300);
+        }, duration);
+    }
+    
+    function hideWelcome() {
+        document.getElementById('welcome-screen').classList.add('hidden');
+        document.getElementById('messages').classList.remove('hidden');
+    }
+    
+    function addMessage(text, isUser = false, hasContext = false) {
+        hideWelcome();
+        const messagesDiv = document.getElementById('messages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message flex gap-4 ' + (isUser ? 'justify-end' : '');
+        
+        if (isUser) {
+            messageDiv.innerHTML = `
+                <div class="max-w-[80%] bg-primary rounded-2xl px-5 py-3 shadow-lg">
+                    <p class="text-white text-sm leading-relaxed">${escapeHtml(text)}</p>
+                </div>
+            `;
+        } else {
+            const contextBadge = hasContext ? '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-medium bg-blue-500/20 text-blue-400 border border-blue-500/30 mb-2"><span class="material-symbols-outlined" style="font-size: 12px;">history</span>Contextual response</span>' : '';
+            
+            messageDiv.innerHTML = `
+                <div class="flex-shrink-0 size-8 rounded-full bg-gradient-to-br from-primary to-primary-hover flex items-center justify-center shadow-lg">
+                    <span class="material-symbols-outlined text-white text-sm">gavel</span>
+                </div>
+                <div class="flex-1 max-w-[80%]">
+                    ${contextBadge}
+                    <div class="bg-[#1e293b] rounded-2xl px-5 py-4 shadow-lg border border-slate-700">
+                        <div class="text-slate-200 text-sm leading-relaxed whitespace-pre-wrap">${text}</div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        messagesDiv.appendChild(messageDiv);
+        messageDiv.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+    
+    function addThinkingMessage() {
+        hideWelcome();
+        const messagesDiv = document.getElementById('messages');
+        const thinkingDiv = document.createElement('div');
+        thinkingDiv.id = 'thinking-message';
+        thinkingDiv.className = 'message flex gap-4';
+        thinkingDiv.innerHTML = `
+            <div class="flex-shrink-0 size-8 rounded-full bg-gradient-to-br from-primary to-primary-hover flex items-center justify-center shadow-lg animate-pulse">
+                <span class="material-symbols-outlined text-white text-sm">search</span>
+            </div>
+            <div class="flex-1">
+                <div class="bg-[#1e293b] rounded-2xl px-5 py-4 shadow-lg border border-slate-700">
+                    <p class="text-slate-400 text-sm">Searching legal database...</p>
+                </div>
+            </div>
+        `;
+        messagesDiv.appendChild(thinkingDiv);
+        thinkingDiv.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+    
+    function removeThinkingMessage() {
+        const thinking = document.getElementById('thinking-message');
+        if (thinking) thinking.remove();
+    }
+    
+    async function sendQuestion() {
+        const input = document.getElementById('question-input');
+        const question = input.value.trim();
+        
+        if (!question) return;
+        
+        if (question.length > 1000) {
+            showToast('Question exceeds maximum length (1000 characters)');
+            return;
+        }
+        
+        addMessage(question, true);
+        input.value = '';
+        messageCount++;
+        updateStats();
+        
+        addThinkingMessage();
+        
+        try {
+            const response = await fetch(`${API_BASE}/query`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Session-ID': sessionId
+                },
+                body: JSON.stringify({
+                    question: question,
+                    research_mode: true,
+                    session_id: sessionId
+                })
+            });
+            
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.detail || 'Request failed');
+            }
+            
+            const data = await response.json();
+            
+            if (data.session_id) {
+                sessionId = data.session_id;
+            }
+            
+            removeThinkingMessage();
+            
+            let formattedAnswer = data.answer;
+            if (data.sources && data.sources.length > 0) {
+                formattedAnswer += '\n\n📚 Sources:\n';
+                data.sources.slice(0, 3).forEach((source, i) => {
+                    formattedAnswer += `${i + 1}. ${source}\n`;
+                });
+            }
+            
+            addMessage(formattedAnswer, false, data.has_follow_up_context);
+            updateStats();
+            
+        } catch (error) {
+            removeThinkingMessage();
+            addMessage('System error: ' + error.message, false);
+            console.error('Error:', error);
+        }
+    }
+    
+    async function clearConversation() {
+        if (!sessionId) return;
+        
+        try {
+            const response = await fetch(`${API_BASE}/session/clear?session_id=${sessionId}`, {
+                method: 'POST'
+            });
+            
+            if (response.ok) {
+                document.getElementById('messages').innerHTML = '';
+                document.getElementById('messages').classList.add('hidden');
+                document.getElementById('welcome-screen').classList.remove('hidden');
+                
+                messageCount = 0;
+                updateStats();
+                
+                showToast('Session reset');
+            }
+        } catch (error) {
+            showToast('Failed to reset session');
+        }
+    }
+    
+    function updateStats() {
+        document.getElementById('message-count').textContent = messageCount;
+    }
+    
+    function askQuestion(question) {
+        document.getElementById('question-input').value = question;
+        sendQuestion();
+    }
+    
+    function handleKeyPress(event) {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault();
+            sendQuestion();
+        }
+    }
+    
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    document.getElementById('question-input').addEventListener('input', (e) => {
+        document.getElementById('char-count').textContent = e.target.value.length;
+    });
+    
+    initSession();
+    checkHealth();
+    setInterval(checkHealth, 30000);
+</script>
 
-
-@app.exception_handler(Exception)
-async def global_exception_handler(request, exc):
-    """Global error handler"""
-    print(f"Unhandled exception: {exc}")
-    return JSONResponse(
-        status_code=500,
-        content={"detail": "An unexpected error occurred. Please try again."}
-    )
-
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(
-        "api_server:app",
-        host="0.0.0.0",
-        port=8000,
-        reload=True,
-        log_level="info"
-    )
+</body>
+</html>

@@ -49,9 +49,16 @@ class ConversationMemory:
         if not self.history:
             return False
         
-        indicators = ['what about', 'how about', 'can you', 'tell me more', 'elaborate', 
-                     'explain that', 'give me examples', 'example', 'clarify', 'more details', 
-                     'why', 'how', 'also']
+        indicators = [
+            'what about', 'how about', 'can you', 'tell me more', 'elaborate',
+            'explain that', 'give me examples', 'example', 'clarify', 'more details',
+            'why', 'how', 'also',
+            # Hinglish / Hindi follow-up cues
+            'detail', 'detail me', 'aur detail', 'or detail', 'aur', 'aur batao',
+            'samjhao', 'samjha', 'samjhaao', 'samjhaiye', 'samjhaaiye',
+            'vistar', 'vistaar', 'विस्तार', 'और', 'और बताओ', 'समझाओ', 'समझाइए',
+            'iska', 'isme', 'ye', 'yeh', 'yah', 'yeh bhi', 'is me', 'is par'
+        ]
         
         q_lower = question.lower().strip()
         pronouns = ['it', 'that', 'this', 'these', 'those', 'they']
@@ -63,6 +70,19 @@ class ConversationMemory:
             return any(ind in q_lower for ind in indicators)
         
         return False
+
+    @staticmethod
+    def detect_response_language(question: str) -> str:
+        q = question.strip()
+        # Devanagari script present
+        if re.search(r'[\u0900-\u097F]', q):
+            return "Hindi"
+        # Explicit language preference in Hinglish/English
+        if re.search(r'\b(hindi|हिंदी)\b', q, re.IGNORECASE):
+            return "Hindi"
+        if re.search(r'\b(english|अंग्रेजी)\b', q, re.IGNORECASE):
+            return "English"
+        return ""
     
     def clear(self):
         self.history.clear()
@@ -249,6 +269,7 @@ YOUR KNOWLEDGE BASE:
 - NDPS Act, 1985 (Narcotic Drugs and Psychotropic Substances)
 
 CRITICAL INSTRUCTIONS:
+0. LANGUAGE: Always respond in the language the user requests. If the user explicitly asks for Hindi, respond only in Hindi. If the user explicitly asks for English, respond only in English.
 1. When asked about criminal law: ALWAYS cite BNS (NOT IPC), unless specifically asked about IPC
 2. When asked about procedure: ALWAYS cite BNSS (NOT CrPC)
 3. When asked about evidence: ALWAYS cite BSA (NOT Evidence Act)
@@ -264,7 +285,7 @@ Key Changes: [clearly list what changed]"
 
 EXAMPLES:
 Q: "What is murder?"
-A: "Under BNS Section 103, murder is punishable with death or life imprisonment..."
+A: "Under BNS Section 101, murder is defined, and BNS Section 103 provides the punishment..."
 
 Q: "Compare IPC 302 with BNS 103"
 A: "Old Law: IPC Section 302 provided punishment for murder...
@@ -325,9 +346,13 @@ Answer:"""
         
         try:
             # Follow-up detection
+            response_language = ConversationMemory.detect_response_language(question)
             enhanced_q = question
             if self.memory.is_follow_up(question):
                 enhanced_q = f"{self.memory.get_context_string()}\n\nCurrent: {question}"
+            # Keep retrieval on user question, but enforce language in the LLM prompt
+            if response_language:
+                enhanced_q = f"{enhanced_q}\n\nPlease answer in {response_language}."
             
             # Search
             k = AdvancedSearch.dynamic_k(question)

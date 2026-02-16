@@ -37,6 +37,7 @@ app.add_middleware(
 # Session management
 sessions: Dict[str, dict] = {}
 SESSION_TIMEOUT = timedelta(hours=2)
+MAX_SESSION_HISTORY = 5
 
 # Initialize RAG system
 rag_system = None
@@ -100,9 +101,25 @@ def get_or_create_session(session_id: Optional[str] = None) -> str:
     sessions[new_session_id] = {
         'created_at': datetime.now(),
         'last_activity': datetime.now(),
-        'message_count': 0
+        'message_count': 0,
+        'history': []
     }
     return new_session_id
+
+
+def _build_session_context(session_id: str) -> str:
+    """Build a compact context block from session history."""
+    history = sessions.get(session_id, {}).get('history', [])
+    if not history:
+        return ""
+
+    lines = ["Previous conversation (same session):"]
+    for i, ex in enumerate(history[-MAX_SESSION_HISTORY:], 1):
+        answer = ex.get("answer", "")
+        preview = answer[:220] + "..." if len(answer) > 220 else answer
+        lines.append(f"Q{i}: {ex.get('question', '')}")
+        lines.append(f"A{i}: {preview}")
+    return "\n".join(lines)
 
 
 # Request/Response Models
@@ -182,10 +199,8 @@ async def clear_session(session_id: str):
         raise HTTPException(503, "RAG system not initialized")
     
     if session_id in sessions:
-        # Clear RAG system memory
-        # Note: This clears global memory. For true multi-user,
-        # you'd need separate RAG instances per session
-        rag_system.clear_conversation()
+        # Clear only this session's chat history
+        sessions[session_id]['history'] = []
         sessions[session_id]['last_activity'] = datetime.now()
         return {"message": "Conversation cleared", "session_id": session_id}
     
@@ -212,15 +227,29 @@ async def query_legal_system(
         sessions[session_id]['message_count'] += 1
         sessions[session_id]['last_activity'] = datetime.now()
         
-        # Query with memory
-        result = rag_system.query(request.question)
+        # Build per-session context and query without global memory
+        session_context = _build_session_context(session_id)
+        is_follow_up = bool(session_context)
+        effective_question = request.question
+        if session_context:
+            effective_question = (
+                f"{session_context}\n\n"
+                "Use previous conversation only if relevant to the current query.\n\n"
+                f"Current: {request.question}"
+            )
+
+        result = rag_system.query(effective_question, use_memory=False)
         
         # Check if error occurred
         if result.get('error'):
             raise HTTPException(400, result['answer'])
         
-        # Check if it was a follow-up
-        is_follow_up = rag_system.memory.is_follow_up(request.question)
+        # Store exchange in this session only
+        sessions[session_id]['history'].append({
+            "question": request.question,
+            "answer": result['answer']
+        })
+        sessions[session_id]['history'] = sessions[session_id]['history'][-MAX_SESSION_HISTORY:]
         
         return QueryResponse(
             answer=result['answer'],
@@ -281,7 +310,17 @@ async def websocket_chat(websocket: WebSocket):
             
             try:
                 # Query with memory
-                result = rag_system.query(question)
+                session_context = _build_session_context(session_id)
+                is_follow_up = bool(session_context)
+                effective_question = question
+                if session_context:
+                    effective_question = (
+                        f"{session_context}\n\n"
+                        "Use previous conversation only if relevant to the current query.\n\n"
+                        f"Current: {question}"
+                    )
+
+                result = rag_system.query(effective_question, use_memory=False)
                 
                 if result.get('error'):
                     await websocket.send_json({
@@ -289,6 +328,11 @@ async def websocket_chat(websocket: WebSocket):
                         "message": result['answer']
                     })
                 else:
+                    sessions[session_id]['history'].append({
+                        "question": question,
+                        "answer": result['answer']
+                    })
+                    sessions[session_id]['history'] = sessions[session_id]['history'][-MAX_SESSION_HISTORY:]
                     await websocket.send_json({
                         "type": "answer",
                         "answer": result['answer'],
@@ -322,7 +366,7 @@ async def get_session_stats(session_id: str):
         "created_at": session['created_at'].isoformat(),
         "last_activity": session['last_activity'].isoformat(),
         "message_count": session['message_count'],
-        "conversation_length": len(rag_system.memory.history) if rag_system else 0
+        "conversation_length": len(session.get('history', []))
     }
 
 

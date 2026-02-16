@@ -327,7 +327,7 @@ Answer:"""
         q = question.lower().strip()
         return any(g == q or q.startswith(g + ' ') for g in greetings) and len(question.split()) <= 4
     
-    def query(self, question: str) -> Dict:
+    def query(self, question: str, use_memory: bool = True) -> Dict:
         # Validate
         valid, err = self.validate_question(question)
         if not valid:
@@ -348,7 +348,7 @@ Answer:"""
             # Follow-up detection
             response_language = ConversationMemory.detect_response_language(question)
             enhanced_q = question
-            if self.memory.is_follow_up(question):
+            if use_memory and self.memory.is_follow_up(question):
                 enhanced_q = f"{self.memory.get_context_string()}\n\nCurrent: {question}"
             # Keep retrieval on user question, but enforce language in the LLM prompt
             if response_language:
@@ -371,7 +371,8 @@ Answer:"""
                 sources.append(f"{src} (Page {page})")
             
             # Store
-            self.memory.add_exchange(question, answer)
+            if use_memory:
+                self.memory.add_exchange(question, answer)
             
             return {
                 'answer': answer,

@@ -1,0 +1,439 @@
+==============================================================================
+LEGAL NOTICE DRAFTING GUIDE FOR INDIAN CITIZENS
+Common formats and templates under Indian law
+==============================================================================
+
+WHAT IS A LEGAL NOTICE?
+A legal notice is a formal written communication sent to a person or
+organization informing them of your grievance and intention to take legal
+action if the matter is not resolved. Under many Indian laws, sending a legal
+notice is MANDATORY before filing a case in court.
+
+WHEN IS A LEGAL NOTICE REQUIRED?
+- Cheque bounce: MANDATORY under Negotiable Instruments Act Section 138 —
+  notice must be sent within 30 days of cheque return.
+- Recovery of money/debt: Recommended before filing a civil suit.
+- Consumer complaints: Recommended before approaching consumer forum.
+- Breach of contract: Required to establish the other party was given a
+  chance to remedy.
+- Property disputes: Recommended before filing any property suit.
+- Defamation: Recommended before filing a case.
+
+HOW TO SEND A LEGAL NOTICE:
+- Send via Registered Post with Acknowledgment Due (RPAD) — this is proof
+  of delivery.
+- Keep a copy of the notice and the postal receipt.
+- You can also send via courier with tracking, but RPAD is legally stronger.
+- The recipient typically gets 15 to 30 days to respond.
+
+==============================================================================
+STANDARD LEGAL NOTICE FORMAT
+==============================================================================
+
+LEGAL NOTICE
+
+Date: [DD/MM/YYYY]
+
+To,
+[Full Name of Recipient]
+[Complete Address]
+[City, State, PIN Code]
+
+From,
+[Your Full Name]
+[Your Complete Address]
+[City, State, PIN Code]
+
+Through: [Your Name] (in person) / [Advocate Name, if any]
+
+Subject: Legal Notice for [brief description — e.g., "Recovery of Rs. X",
+"Cheque Bounce under NI Act Section 138", "Breach of Contract", etc.]
+
+UNDER SECTION: [Applicable law section]
+
+Sir/Madam,
+
+Under instructions from my client [Your Name] / On my own behalf, I hereby
+serve upon you this Legal Notice as follows:
+
+1. FACTS: [State the facts clearly in numbered paragraphs]
+   - Who you are and your relationship with the recipient.
+   - What happened — dates, amounts, events in chronological order.
+   - What was agreed upon and what was violated.
+
+2. GRIEVANCE: [State your specific complaint]
+   - How the recipient's actions/inactions have caused you harm or loss.
+   - Quantify the loss if applicable (amount in words and figures).
+
+3. LEGAL BASIS: [Cite the applicable law]
+   - The specific sections of law that have been violated.
+   - Your legal rights under those sections.
+
+4. DEMAND: [State exactly what you want]
+   - Specific action you want the recipient to take.
+   - Amount to be paid (if money recovery).
+   - Deadline (usually 15 or 30 days from receipt of notice).
+
+5. CONSEQUENCE: [State what happens if demand is not met]
+   - "Failing which, I shall be constrained to initiate appropriate civil/
+     criminal proceedings against you before the competent court of law,
+     at your risk, cost, and consequence."
+
+[Your Full Name]
+[Date]
+[Signature]
+
+==============================================================================
+TEMPLATE 1: CHEQUE BOUNCE NOTICE (NI Act Section 138)
+==============================================================================
+
+LEGAL NOTICE
+
+Date: [DD/MM/YYYY]
+
+To,
+[Name of person who issued the cheque]
+[Address]
+
+From,
+[Your Name]
+[Your Address]
+
+Subject: Legal Notice under Section 138 of the Negotiable Instruments Act,
+1881 for dishonour of cheque
+
+Sir/Madam,
+
+Under instructions from my client / On my own behalf, I serve this notice:
+
+1. You issued Cheque No. [number] dated [date] for Rs. [amount in figures]
+   (Rupees [amount in words] only) drawn on [Bank Name], [Branch], towards
+   [reason — payment of debt / loan repayment / purchase price / etc.].
+
+2. The said cheque was presented for payment on [date] but was returned
+   unpaid/dishonoured by the bank with the remark "[reason — e.g.,
+   Insufficient Funds / Account Closed / Payment Stopped]" vide bank
+   memo dated [date].
+
+3. This constitutes an offence punishable under Section 138 of the
+   Negotiable Instruments Act, 1881, which provides for imprisonment up to
+   2 years and/or fine up to twice the cheque amount.
+
+4. I hereby demand that you pay the sum of Rs. [amount] within 15 days from
+   the receipt of this notice, by way of demand draft / cash / bank transfer.
+
+5. If you fail to make the payment within the stipulated period of 15 days,
+   I shall be compelled to file a criminal complaint under Section 138 of
+   the Negotiable Instruments Act before the competent Magistrate, entirely
+   at your risk, cost, and consequence.
+
+[Your Name]
+[Date and Signature]
+
+NOTE: This notice MUST be sent within 30 days of cheque return. The recipient
+gets 15 days to pay. If not paid, you must file the case within 30 days after
+the 15-day period expires.
+
+==============================================================================
+TEMPLATE 2: MONEY RECOVERY / DEBT NOTICE
+==============================================================================
+
+LEGAL NOTICE
+
+Date: [DD/MM/YYYY]
+
+To,
+[Debtor's Name]
+[Address]
+
+From,
+[Your Name]
+[Address]
+
+Subject: Legal Notice for Recovery of Rs. [amount]
+
+Sir/Madam,
+
+1. On [date], you borrowed/took a sum of Rs. [amount] (Rupees [words] only)
+   from me for [purpose]. [You signed a promissory note / There was an
+   agreement dated [date] / There are witnesses to this transaction].
+
+2. As per the agreed terms, you were to repay the said amount by [date].
+   Despite the due date having passed and my repeated verbal/written
+   reminders on [dates], you have failed to repay the amount.
+
+3. The outstanding amount as on date is Rs. [amount] (inclusive of interest
+   at [X]% per annum as agreed / as per law).
+
+4. I hereby demand that you repay the entire outstanding amount of Rs. [amount]
+   within 15 days from receipt of this notice.
+
+5. Failing which, I shall be constrained to file a civil suit for recovery
+   of money along with interest, damages, and cost of litigation before
+   the competent civil court, at your risk, cost, and consequence.
+
+[Your Name]
+[Date and Signature]
+
+==============================================================================
+TEMPLATE 3: TENANT EVICTION NOTICE
+==============================================================================
+
+LEGAL NOTICE
+
+Date: [DD/MM/YYYY]
+
+To,
+[Tenant's Name]
+[Rented Property Address]
+
+From,
+[Landlord's Name]
+[Address]
+
+Subject: Legal Notice for Eviction / Termination of Tenancy
+
+Sir/Madam,
+
+1. You are occupying the property situated at [full address of rented
+   property] as a tenant under a rent/lease agreement dated [date] at a
+   monthly rent of Rs. [amount].
+
+2. [State the ground for eviction — choose applicable]:
+   a) You have defaulted in payment of rent for the months of [months],
+      totaling Rs. [amount].
+   b) You have sub-let the premises without my written consent.
+   c) The lease period has expired on [date] and I do not wish to renew.
+   d) I require the premises for my own bona fide use.
+   e) You have caused damage to the property / misused the premises.
+
+3. I hereby call upon you to:
+   a) [Pay all arrears of rent within 15 days], AND/OR
+   b) Vacate and hand over peaceful possession of the said premises within
+      [30 days / as per state Rent Act] from receipt of this notice.
+
+4. Failing which, I shall initiate eviction proceedings before the competent
+   Rent Controller / Civil Court, at your risk, cost, and consequence.
+
+[Landlord Name]
+[Date and Signature]
+
+NOTE: Notice period and eviction grounds vary by state under respective
+State Rent Control Acts. Check your state's specific requirements.
+
+==============================================================================
+TEMPLATE 4: CONSUMER COMPLAINT NOTICE
+==============================================================================
+
+LEGAL NOTICE
+
+Date: [DD/MM/YYYY]
+
+To,
+[Company/Seller Name]
+[Address]
+
+From,
+[Your Name]
+[Address]
+
+Subject: Legal Notice under Consumer Protection Act, 2019 for
+[Defective Product / Deficiency in Service]
+
+Sir/Madam,
+
+1. On [date], I purchased [product/service] from your [store/website/office],
+   vide Invoice/Bill No. [number] for Rs. [amount].
+
+2. [Describe the defect or deficiency]:
+   - The product was found to be defective / not as described / not matching
+     the specifications.
+   - The service provided was deficient / not completed / not as promised.
+   - Despite my complaint on [date] (Complaint No. [if any]), the issue
+     has not been resolved.
+
+3. This amounts to unfair trade practice / deficiency in service under the
+   Consumer Protection Act, 2019.
+
+4. I demand that you:
+   a) Replace the defective product / Complete the service properly, AND
+   b) Pay compensation of Rs. [amount] for mental agony and harassment,
+   within 15 days from receipt of this notice.
+
+5. Failing which, I shall file a consumer complaint before the District
+   Consumer Disputes Redressal Forum under the Consumer Protection Act,
+   2019, seeking refund, compensation, and litigation costs.
+
+[Your Name]
+[Date and Signature]
+
+==============================================================================
+TEMPLATE 5: BREACH OF CONTRACT NOTICE
+==============================================================================
+
+LEGAL NOTICE
+
+Date: [DD/MM/YYYY]
+
+To,
+[Other Party's Name]
+[Address]
+
+From,
+[Your Name]
+[Address]
+
+Subject: Legal Notice for Breach of Contract / Agreement dated [date]
+
+Sir/Madam,
+
+1. A contract/agreement was entered into between us on [date] wherein
+   [briefly describe the terms — what each party agreed to do].
+
+2. As per Clause [X] of the said agreement, you were required to
+   [specific obligation] by [date/deadline].
+
+3. You have failed to fulfill your obligations under the said agreement,
+   which constitutes a breach of contract. Specifically: [describe the breach].
+
+4. Due to your breach, I have suffered a loss of Rs. [amount] on account of
+   [describe losses].
+
+5. I hereby demand that you:
+   a) Fulfill your obligations under the contract within 15 days, OR
+   b) Pay damages of Rs. [amount] as compensation for breach.
+
+6. Failing which, I shall file a civil suit for specific performance /
+   damages for breach of contract under the Indian Contract Act, 1872,
+   before the competent civil court, at your risk, cost, and consequence.
+
+[Your Name]
+[Date and Signature]
+
+==============================================================================
+TEMPLATE 6: DEFAMATION NOTICE
+==============================================================================
+
+LEGAL NOTICE
+
+Date: [DD/MM/YYYY]
+
+To,
+[Defamer's Name]
+[Address]
+
+From,
+[Your Name]
+[Address]
+
+Subject: Legal Notice for Defamation under BNS Section 356
+
+Sir/Madam,
+
+1. On [date], you made/published defamatory statements about me, namely:
+   "[quote or describe the defamatory statement]"
+   through [medium — social media post / newspaper / verbal statement in
+   presence of witnesses / WhatsApp message, etc.].
+
+2. The said statements are completely false, baseless, and have been made
+   with the malicious intention of defaming me and lowering my reputation
+   in the eyes of the public / my colleagues / my community.
+
+3. As a result, I have suffered immense mental agony, loss of reputation,
+   and [any financial loss if applicable].
+
+4. Defamation is a criminal offence under BNS Section 356 (formerly IPC
+   Section 499/500), punishable with imprisonment up to 2 years and fine.
+
+5. I demand that you:
+   a) Immediately remove/retract the defamatory content.
+   b) Issue a public apology in the same medium.
+   c) Pay compensation of Rs. [amount] for damages to my reputation.
+   within 15 days from receipt of this notice.
+
+6. Failing which, I shall initiate criminal proceedings under BNS Section 356
+   and a civil suit for damages, at your risk, cost, and consequence.
+
+[Your Name]
+[Date and Signature]
+
+==============================================================================
+TEMPLATE 7: EMPLOYMENT / SALARY NOTICE
+==============================================================================
+
+LEGAL NOTICE
+
+Date: [DD/MM/YYYY]
+
+To,
+[Employer/Company Name]
+[Company Address]
+
+From,
+[Employee Name]
+[Address]
+
+Subject: Legal Notice for Non-Payment of Salary / Wrongful Termination /
+Denial of Benefits
+
+Sir/Madam,
+
+1. I was employed with your organization as [designation] from [start date]
+   to [end date / present] at a monthly salary of Rs. [amount].
+
+2. [Choose applicable]:
+   a) You have failed to pay my salary for the months of [months], amounting
+      to Rs. [total amount].
+   b) I was wrongfully terminated on [date] without notice / without
+      following due process / without payment of dues.
+   c) You have not paid my [PF / gratuity / bonus / leave encashment /
+      full and final settlement] despite my repeated requests.
+
+3. This is in violation of [applicable law — Payment of Wages Act, 1936 /
+   Industrial Disputes Act, 1947 / Payment of Gratuity Act, 1972 /
+   Employment contract dated [date]].
+
+4. I demand payment of Rs. [amount] towards [salary arrears / termination
+   compensation / unpaid dues] within 15 days from receipt of this notice.
+
+5. Failing which, I shall approach the Labour Commissioner / Labour Court /
+   competent civil court for recovery of my lawful dues along with interest,
+   compensation, and litigation costs.
+
+[Employee Name]
+[Date and Signature]
+
+==============================================================================
+IMPORTANT TIPS FOR LEGAL NOTICES
+==============================================================================
+
+1. LANGUAGE: Keep it formal, factual, and professional. Avoid emotional or
+   threatening language.
+
+2. FACTS OVER OPINIONS: State facts with dates, amounts, and specifics.
+   Avoid vague allegations.
+
+3. PROOF: Preserve all supporting documents — agreements, receipts, messages,
+   photos, bank statements, etc. Mention them in the notice.
+
+4. TIMELINE: Note important limitation periods:
+   - Cheque bounce notice: Must send within 30 days of cheque return.
+   - Consumer complaints: Within 2 years from cause of action.
+   - Civil suits: Varies (typically 3 years under Limitation Act, 1963).
+   - Labour disputes: Varies by state.
+
+5. DELIVERY: Always send by Registered Post with Acknowledgment Due (RPAD).
+   Keep the postal receipt and the AD card when returned.
+
+6. COPIES: Keep at least 2 copies of the notice — one for yourself and
+   one for court records.
+
+7. RESPONSE: If you RECEIVE a legal notice, do not panic. You typically have
+   15-30 days to respond. Consult a lawyer before replying.
+
+8. COST: Drafting a notice yourself is free. A lawyer typically charges
+   Rs. 500 to Rs. 5,000 depending on complexity and city.
+
+9. DISCLAIMER: While these templates help you understand the format, for
+   complex matters or high-value disputes, consulting a qualified advocate
+   is recommended.

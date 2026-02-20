@@ -1,10 +1,33 @@
+# Python
 __pycache__/
 venv/
 *.pyc
 .env
+
+# Vectorstore (rebuilt locally)
 legal_vectorstore/
+
+# Database / runtime data
+*.db
+*.db-shm
+*.db-wal
+chat_data.json
+news_cache.json
+
+# Old / legacy files
+*_old.py
+*_old.html
+README_OLD.md
+
+# Utility / dev scripts
 commands.txt
 demo.py
 add_landmark_cases.py
+VERIFICATION.py
+REFACTORING_COMPLETE.md
+SIMPLIFICATION_SUMMARY.md
+
+# OS
 .DS_Store
+Thumbs.db
 *.egg-info/

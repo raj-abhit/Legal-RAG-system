@@ -1,0 +1,364 @@
+==============================================================================
+PRACTICAL LEGAL RIGHTS GUIDE FOR INDIAN CITIZENS
+Based on Indian Constitution, BNS 2023, BNSS 2023, BSA 2023, and Special Acts
+==============================================================================
+
+This guide explains your legal rights in everyday situations under Indian law.
+All references use the latest laws (BNS/BNSS/BSA effective July 1, 2024) with
+old law references (IPC/CrPC) where helpful for context.
+
+==============================================================================
+SECTION 1: YOUR RIGHTS DURING ARREST
+==============================================================================
+
+WHEN CAN POLICE ARREST YOU?
+- With a warrant: A Magistrate issues a written arrest warrant based on evidence.
+- Without a warrant (BNSS Section 35, old CrPC Section 41): Police can arrest
+  without warrant ONLY for cognizable offences (serious crimes like murder,
+  robbery, kidnapping). For non-cognizable offences (minor crimes), police
+  CANNOT arrest without a warrant — they need Magistrate permission.
+- Important: For offences with punishment up to 7 years, police should NOT
+  arrest if the person has a fixed address and cooperates. Instead, they should
+  issue a Notice of Appearance (BNSS Section 35).
+- Police must record reasons for arrest in writing.
+
+WHEN POLICE CANNOT ARREST YOU:
+- For non-cognizable offences without a warrant or Magistrate order.
+- After sunset and before sunrise (BNSS Section 37) — women cannot be arrested
+  between sunset and sunrise EXCEPT in exceptional circumstances AND only by a
+  female police officer with prior Magistrate permission.
+- Without informing you of the grounds/reasons for arrest.
+- Without following due procedure (like producing before Magistrate within 24 hours).
+- For bailable offences if you offer to post bail.
+
+YOUR RIGHTS IF YOU ARE ARRESTED:
+1. RIGHT TO KNOW THE REASON (Article 22(1) of Constitution, BNSS Section 36):
+   Police MUST tell you WHY you are being arrested. Ask: "What is the charge?"
+
+2. RIGHT TO INFORM SOMEONE (BNSS Section 36(1)(b)):
+   You have the right to inform a family member, friend, or any person of your
+   choice about your arrest. Police must allow you to make this call.
+
+3. RIGHT TO A LAWYER (Article 22(1) of Constitution, BNSS Section 36):
+   You have the right to consult and be defended by a legal practitioner of
+   your choice. If you cannot afford one, the state must provide free legal aid
+   under Legal Services Authorities Act, 1987.
+
+4. RIGHT TO BE PRODUCED BEFORE MAGISTRATE WITHIN 24 HOURS (Article 22(2),
+   BNSS Section 58):
+   Police cannot keep you in custody beyond 24 hours without a Magistrate's
+   order. Travel time to court is excluded from this 24-hour period.
+
+5. RIGHT AGAINST SELF-INCRIMINATION (Article 20(3) of Constitution):
+   You cannot be forced to make a confession or give testimony against yourself.
+   Any confession made to a police officer is NOT admissible in court (BSA
+   Section 23, old Evidence Act Section 25).
+
+6. RIGHT TO BAIL:
+   - Bailable offences: Bail is a RIGHT. Police must grant bail at the station
+     itself if you can furnish surety (BNSS Section 478).
+   - Non-bailable offences: Bail is at the court's discretion. You apply to the
+     Magistrate.
+   - Default bail (BNSS Section 187): If police do not file chargesheet within
+     60 days (for offences up to 3 years punishment) or 90 days (for more
+     serious offences), you are ENTITLED to bail as a matter of right.
+
+7. RIGHT TO MEDICAL EXAMINATION (BNSS Section 51):
+   You have the right to be medically examined at the time of arrest. This
+   protects against custodial torture claims.
+
+8. RIGHT AGAINST TORTURE AND INHUMAN TREATMENT (Article 21):
+   Police cannot use torture, third-degree methods, or any inhumane treatment.
+   Custodial violence is a criminal offence. If tortured, you can file a
+   complaint with the National/State Human Rights Commission.
+
+9. RIGHT TO REMAIN SILENT (BSA Section 23):
+   While you must give your name and address, you are NOT obliged to answer
+   questions that may incriminate you.
+
+WHAT TO DO IF YOU ARE ARRESTED — STEP BY STEP:
+Step 1: Stay calm. Do not resist arrest — resisting is itself an offence.
+Step 2: Ask the police officer WHY you are being arrested and under what section.
+Step 3: Immediately ask to call a family member or lawyer.
+Step 4: Do NOT sign any blank papers or make any statement to police.
+Step 5: Note the officer's name and badge number.
+Step 6: Request a copy of the arrest memo — police must prepare one (BNSS Section 36).
+Step 7: Insist on being produced before a Magistrate within 24 hours.
+Step 8: If it is a bailable offence, ask for bail at the police station itself.
+Step 9: If mistreated, note details and file a complaint with NHRC/SHRC later.
+
+==============================================================================
+SECTION 2: YOUR RIGHTS DURING POLICE ENCOUNTERS
+==============================================================================
+
+CAN POLICE STOP AND QUESTION YOU?
+- Police can ask you basic questions (name, address, where you are going).
+- For general inquiry, you are NOT obligated to go to the police station.
+  If police need your statement, they should come to you (BNSS Section 180).
+- Women CANNOT be called to a police station for questioning. Their statements
+  must be recorded at their residence (BNSS Section 180(3)).
+
+CAN POLICE SEARCH YOUR HOME?
+- Generally requires a search warrant from a Magistrate.
+- Police can search without warrant ONLY if there is reason to believe delay
+  would cause evidence to be destroyed (BNSS Sections 94, 185).
+- Search must be conducted in presence of two independent witnesses from the
+  locality (BNSS Section 185(4)).
+- Women's spaces can ONLY be searched by a female officer.
+- You have the right to demand to see the search warrant.
+- A search list (panchnama) of all seized items must be prepared.
+
+CAN POLICE CHECK YOUR PHONE?
+- Police cannot check your phone without your consent or a court order.
+- Under IT Act 2000 Section 69, only specific government authorities can
+  intercept communications, and only with proper authorization.
+- If police forcefully check your phone, it may violate your Right to Privacy
+  (Article 21 — confirmed in K.S. Puttaswamy v. Union of India, 2017).
+
+CAN POLICE USE FORCE?
+- Police can use only reasonable and minimum force necessary.
+- Use of excessive force is an offence.
+- If police use excessive force, you can file a complaint with the Magistrate,
+  Police Complaints Authority, or Human Rights Commission.
+
+==============================================================================
+SECTION 3: FILING AN FIR (FIRST INFORMATION REPORT)
+==============================================================================
+
+WHAT IS AN FIR?
+An FIR is the first step in the criminal justice process. It is a written
+document prepared by police when they receive information about a cognizable
+offence.
+
+YOUR RIGHT TO FILE AN FIR:
+- Police MUST register an FIR for cognizable offences (BNSS Section 173).
+  They cannot refuse.
+- If police refuse, you can:
+  1. Send the complaint by registered post to the Superintendent of Police.
+  2. Go directly to the Magistrate under BNSS Section 175 — the Magistrate
+     can order police to register the FIR.
+  3. File a complaint with the State Police Complaints Authority.
+- Zero FIR: You can file an FIR at ANY police station regardless of
+  jurisdiction (BNSS Section 173(1)). The police station must register it and
+  transfer it to the correct jurisdiction.
+- E-FIR: Many states allow filing FIRs online for certain offences.
+- You MUST receive a free copy of the FIR (BNSS Section 173).
+
+FILING FIR FOR WOMEN:
+- A woman's FIR for sexual offences must be recorded by a woman police officer
+  or any woman officer (BNSS Section 173(3)).
+- Her statement must be recorded at a place of her choice, not necessarily the
+  police station.
+- Video recording of the statement is mandatory for serious offences.
+
+==============================================================================
+SECTION 4: BAIL — YOUR RIGHT TO FREEDOM
+==============================================================================
+
+TYPES OF BAIL:
+1. Regular Bail: Applied through court when arrested for non-bailable offence.
+2. Anticipatory Bail (BNSS Section 482): Before arrest — if you fear arrest,
+   you can apply to Sessions Court or High Court for protection. The court may
+   grant bail with conditions so you are released immediately upon arrest.
+3. Default Bail (BNSS Section 187): Automatic right if chargesheet not filed
+   within the prescribed time (60/90 days).
+4. Interim Bail: Temporary bail granted while the main bail application is pending.
+
+HOW TO APPLY FOR BAIL:
+Step 1: For bailable offences — apply at the police station directly. It is
+        your right and police MUST grant it.
+Step 2: For non-bailable offences — your lawyer files a bail application in
+        the Magistrate's court or Sessions Court.
+Step 3: If denied by lower court — appeal to Sessions Court, then High Court.
+Step 4: In exceptional cases — approach Supreme Court under Article 136.
+
+WHEN BAIL IS USUALLY GRANTED:
+- First-time offenders
+- When the offence is not very serious
+- When there is no risk of fleeing
+- When there is no risk of tampering with evidence
+- When the accused is a woman, child, or sick person
+
+==============================================================================
+SECTION 5: RIGHTS OF WOMEN
+==============================================================================
+
+PROTECTION FROM DOMESTIC VIOLENCE:
+- Protection of Women from Domestic Violence Act, 2005 provides:
+  - Protection orders preventing the abuser from committing violence
+  - Residence orders — woman cannot be thrown out of shared household
+  - Monetary relief for expenses and damages
+  - Custody orders for children
+  - Compensation orders
+- File a Domestic Incident Report with a Protection Officer or police.
+- You can approach the Magistrate directly.
+
+PROTECTION FROM SEXUAL HARASSMENT AT WORKPLACE:
+- Sexual Harassment of Women at Workplace Act, 2013 (POSH Act)
+- Every workplace with 10+ employees must have an Internal Complaints Committee.
+- File complaint within 3 months (extendable by 3 months).
+
+DOWRY RELATED RIGHTS:
+- Dowry Prohibition Act, 1961: Giving or taking dowry is punishable with
+  minimum 5 years imprisonment and Rs. 15,000 fine or dowry value (whichever
+  is more).
+- BNS Section 80: If a woman dies within 7 years of marriage under suspicious
+  circumstances related to dowry demand, it is presumed to be dowry death.
+- BNS Section 86: Cruelty by husband or relatives — punishable up to 3 years
+  and fine.
+
+PROTECTION FROM SEXUAL OFFENCES:
+- BNS Section 63: Rape — punishment 10 years to life imprisonment.
+- BNS Section 69: Sexual intercourse by deceit (false promise of marriage) —
+  up to 10 years.
+- BNS Section 74: Assault with intent to outrage modesty.
+- BNS Section 75: Voyeurism.
+- BNS Section 76: Stalking.
+- POCSO Act 2012: Special protection for children under 18 from sexual offences.
+
+==============================================================================
+SECTION 6: RIGHTS OF THE ACCUSED
+==============================================================================
+
+FUNDAMENTAL RIGHTS OF EVERY ACCUSED PERSON:
+1. Presumption of Innocence: Every person is presumed innocent until proven
+   guilty beyond reasonable doubt. The burden of proof lies on the prosecution.
+2. Right to Fair Trial (Article 21): Includes right to open court trial,
+   right to cross-examine witnesses, right to present evidence.
+3. Right to Speedy Trial: Unreasonable delay in trial violates Article 21.
+   Supreme Court has held that this is a fundamental right.
+4. Right to Free Legal Aid (Article 39A, Legal Services Authorities Act 1987):
+   If you cannot afford a lawyer, the state must provide one free of cost.
+   Contact the District Legal Services Authority (DLSA).
+5. Right Against Double Jeopardy (Article 20(2)): Cannot be prosecuted or
+   punished for the same offence twice.
+6. Right Against Ex-Post-Facto Laws (Article 20(1)): Cannot be convicted for
+   an act that was not a crime when it was committed.
+
+==============================================================================
+SECTION 7: CONSUMER RIGHTS
+==============================================================================
+
+UNDER CONSUMER PROTECTION ACT, 2019:
+- Right to be protected against hazardous goods and services
+- Right to be informed about quality, quantity, price, standard
+- Right to choose from a variety of goods
+- Right to be heard — consumer complaints will be heard
+- Right to seek redressal against unfair trade practices
+- Right to consumer education
+
+WHERE TO FILE CONSUMER COMPLAINTS:
+- Up to Rs. 1 crore: District Consumer Forum
+- Rs. 1 crore to Rs. 10 crore: State Consumer Commission
+- Above Rs. 10 crore: National Consumer Commission
+- Online: consumerhelpline.gov.in or e-daakhil.nic.in
+
+==============================================================================
+SECTION 8: RIGHT TO INFORMATION (RTI)
+==============================================================================
+
+YOUR RTI RIGHTS (RTI Act, 2005):
+- Every citizen can request information from any public authority.
+- Apply with Rs. 10 fee (BPL applicants are exempt).
+- Authority must respond within 30 days (48 hours if life/liberty is involved).
+- If denied or no response: Appeal to First Appellate Authority within 30 days.
+- Second appeal: Central/State Information Commission.
+- Penalty for officers who deny information without reason: Rs. 250/day up
+  to Rs. 25,000.
+
+==============================================================================
+SECTION 9: TRAFFIC AND MOTOR VEHICLE RIGHTS
+==============================================================================
+
+YOUR RIGHTS IN TRAFFIC STOPS:
+- Traffic police must wear proper uniform and display name/badge number.
+- They can only check: driving license, vehicle registration, insurance, PUC.
+- E-challans: You have the right to receive a proper challan with details.
+- You can contest any traffic challan in court.
+- Towing: Vehicle can only be towed if it is causing obstruction. If you are
+  present, police should issue a challan, not tow.
+- Impounding: Vehicle can be impounded only for specific reasons (no license,
+  no registration, involvement in offence). You must get a receipt.
+
+ACCIDENT RELATED:
+- Motor Vehicles Act Section 134: It is your DUTY to help accident victims.
+  Good Samaritans are protected by law — you cannot be harassed by police
+  for helping an accident victim.
+- Hit and run victims or their families can claim compensation from the
+  Motor Accident Claims Tribunal.
+
+==============================================================================
+SECTION 10: CYBER CRIME RIGHTS
+==============================================================================
+
+UNDER IT ACT 2000 AND BNS:
+- Identity theft (IT Act Section 66C): Punishable up to 3 years and Rs. 1 lakh fine.
+- Online fraud: File complaint at cybercrime.gov.in or call 1930.
+- Data protection: Your personal data cannot be shared without consent.
+- Cyber bullying and online harassment: Report to cyber crime cell.
+- Obscene content: Publishing/sharing obscene material is punishable under
+  IT Act Section 67 — up to 5 years and Rs. 10 lakh fine.
+- BNS Section 351(3): Criminal intimidation through electronic communication.
+
+HOW TO REPORT CYBER CRIME:
+Step 1: Preserve evidence (screenshots, messages, URLs).
+Step 2: Report at cybercrime.gov.in (National Cyber Crime Reporting Portal).
+Step 3: Call 1930 (Cyber Crime Helpline).
+Step 4: File FIR at nearest police station or cyber crime cell.
+
+==============================================================================
+SECTION 11: JUVENILE RIGHTS
+==============================================================================
+
+UNDER JUVENILE JUSTICE ACT, 2015:
+- A child (below 18 years) in conflict with law cannot be treated as an adult
+  criminal for most offences.
+- For heinous offences by children aged 16-18: Juvenile Justice Board decides
+  whether to try as adult (after assessment).
+- Children must be kept in Observation Homes, NOT in jail with adults.
+- Identity of juvenile offenders CANNOT be published.
+- Children have right to free legal aid and representation.
+
+==============================================================================
+SECTION 12: PROPERTY AND LAND RIGHTS
+==============================================================================
+
+TENANT RIGHTS:
+- Landlord cannot forcefully evict you — must obtain court order.
+- You have the right to essential services (water, electricity).
+- Rent can only be increased as per Rent Control Act of your state.
+- Security deposit refund rules vary by state.
+
+PROPERTY DISPUTE:
+- File a civil suit for property disputes in the appropriate civil court.
+- For urgent possession issues: Apply for injunction (temporary court order).
+- Women have equal right to ancestral property (Hindu Succession Amendment
+  Act, 2005 — daughters have coparcenary rights equal to sons).
+
+==============================================================================
+SECTION 13: EMERGENCY CONTACTS AND HELPLINES
+==============================================================================
+
+IMPORTANT HELPLINE NUMBERS:
+- Police: 100 or 112 (Emergency Response)
+- Women Helpline: 181 or 1091
+- Child Helpline: 1098 (Childline)
+- Cyber Crime: 1930 or cybercrime.gov.in
+- National Human Rights Commission: 1800-345-4334 (toll-free)
+- Legal Aid: Contact District Legal Services Authority (DLSA) of your district
+- Consumer Helpline: 1800-11-4000 or 1915
+- Senior Citizens Helpline: 14567
+- Anti-Corruption: 1031
+- Road Accident Emergency: 1073
+
+FREE LEGAL AID — WHO IS ELIGIBLE:
+Under Legal Services Authorities Act, 1987:
+- Women and children
+- SC/ST members
+- Industrial workmen
+- Persons in custody
+- Persons with annual income below Rs. 3 lakh (High Court) or Rs. 5 lakh
+  (Supreme Court)
+- Victims of trafficking, disaster, ethnic violence
+- Disabled persons
+- Mentally ill persons

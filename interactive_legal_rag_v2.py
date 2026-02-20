@@ -1,10 +1,14 @@
 """
-Enhanced Interactive Legal RAG System
-Optimized for handling multiple large PDFs:
-- Constitution of India
-- Bharatiya Nyaya Sanhita (BNS) 2023
-- Bharatiya Sakshya Adhiniyam (BSA) 2023  
-- Bharatiya Nagarik Suraksha Sanhita (BNSS) 2023
+Interactive CLI for Legal RAG System
+
+Provides an interactive command-line interface for querying Indian legal documents.
+Supports multi-language (English and Hindi) with conversation history.
+
+Features:
+- Direct querying of legal documents
+- Conversation memory for follow-up questions
+- Source attribution for all answers
+- Multi-language support (English/Hindi)
 """
 
 import os
@@ -12,198 +16,173 @@ import sys
 from pathlib import Path
 from legal_rag_system import LegalRAGSystem
 
+
 def print_banner():
-    """Print welcome banner"""
+    """Print welcome banner."""
     print("\n" + "="*70)
-    print("         LEGAL RAG SYSTEM - INDIAN LAW DATABASE")
+    print("LEGAL RAG SYSTEM - INDIAN LAW DATABASE")
     print("="*70)
-    print("\nThis system provides answers based on:")
-    print("  • Constitution of India")
-    print("  • Bharatiya Nyaya Sanhita (BNS) 2023 - Criminal Law")
-    print("  • Bharatiya Sakshya Adhiniyam (BSA) 2023 - Evidence Law")
-    print("  • Bharatiya Nagarik Suraksha Sanhita (BNSS) 2023 - Criminal Procedure")
-    print("  • 26 Landmark Supreme Court Cases")
+    print("\nKnowledge Base:")
+    print("  ✓ Constitution of India")
+    print("  ✓ BNS 2023 (Bharatiya Nyaya Sanhita) - Current Criminal Law")
+    print("  ✓ BNSS 2023 (Criminal Procedure)")
+    print("  ✓ BSA 2023 (Evidence Law)")
+    print("  ✓ Special Acts: RTI, POCSO, IT Act, NDPS, Motor Vehicles Act")
+    print("\nLanguage Support: English & Hindi (Hinglish friendly)")
     print("="*70 + "\n")
 
-def get_pdf_paths():
-    """Get PDF file paths from user"""
-    print("PDF FILE SETUP")
-    print("-" * 70)
-    
-    # Check if documents folder exists
-    if os.path.exists("documents"):
-        print("Found 'documents' folder. Looking for PDFs...\n")
-        
-        # Auto-detect PDFs in documents folder
-        pdf_files = list(Path("documents").glob("*.pdf"))
-        if pdf_files:
-            print(f"Found {len(pdf_files)} PDF(s) in documents folder:")
-            for i, pdf in enumerate(pdf_files, 1):
-                size_mb = pdf.stat().st_size / (1024 * 1024)
-                print(f"  {i}. {pdf.name} ({size_mb:.2f} MB)")
-            
-            use_auto = input("\nUse these PDFs automatically? (y/n): ").strip().lower()
-            if use_auto == 'y':
-                return [str(pdf) for pdf in pdf_files]
-    
-    # Manual entry
-    print("\nPlease provide paths to your PDF files.")
-    print("(Press Enter without input to skip a file)\n")
-    
-    pdf_paths = []
-    pdf_names = [
-        ("Constitution of India", "e.g., documents/Constitution.pdf"),
-        ("Bharatiya Nyaya Sanhita (BNS)", "e.g., documents/BNS_2023.pdf"),
-        ("Bharatiya Sakshya Adhiniyam (BSA)", "e.g., documents/BSA_2023.pdf"),
-        ("Bharatiya Nagarik Suraksha Sanhita (BNSS)", "e.g., documents/BNSS_2023.pdf")
-    ]
-    
-    for name, example in pdf_names:
-        while True:
-            path = input(f"{name} PDF path ({example}): ").strip()
-            
-            if not path:  # Skip this file
-                print(f"  Skipping {name}")
-                break
-            
-            if os.path.exists(path) and path.lower().endswith('.pdf'):
-                pdf_paths.append(path)
-                print(f"  ✓ Found {name}")
-                break
-            else:
-                print(f"  ✗ File not found or not a PDF. Try again.")
-    
-    if not pdf_paths:
-        print("\n⚠ No valid PDFs provided. Cannot proceed.")
-        sys.exit(1)
-    
-    return pdf_paths
 
 def display_help():
-    """Display help information"""
+    """Display usage examples and tips."""
     print("\n" + "="*70)
     print("HELP & EXAMPLES")
     print("="*70)
-    print("\nSample Questions:")
-    print("\n1. Constitutional Law:")
-    print("   - What are the fundamental rights under Article 19?")
-    print("   - Explain the basic structure doctrine")
-    print("   - What is judicial review?")
+    print("\n📚 Sample Questions:")
+    print("\n  Constitutional Law:")
+    print("    - What are fundamental rights under Article 21?")
+    print("    - Explain the right to privacy")
     
-    print("\n2. Criminal Law (BNS):")
-    print("   - What is the punishment for murder under BNS?")
-    print("   - Difference between culpable homicide and murder")
-    print("   - What are the provisions for cybercrime?")
+    print("\n  Criminal Law (BNS):")
+    print("    - What is punishment for murder under BNS Section 103?")
+    print("    - Difference between BNS and old IPC")
+    print("    - Provisions for cybercrime")
     
-    print("\n3. Evidence Law (BSA):")
-    print("   - What is the best evidence rule?")
-    print("   - Can electronic records be used as evidence?")
-    print("   - Rules for examination of witnesses")
+    print("\n  Multi-language Questions:")
+    print("    - बाल विवाह क्या है? (in Hindi)")
+    print("    - bnss mein arrest kaise hota hai? (in Hinglish)")
     
-    print("\n4. Criminal Procedure (BNSS):")
-    print("   - What is the procedure for arrest?")
-    print("   - Powers of magistrates")
-    print("   - Anticipatory bail provisions")
-    
-    print("\n5. Comparative Questions:")
-    print("   - How does BNS differ from IPC Section 420?")
-    print("   - Changes in new evidence law vs old Evidence Act")
-    print("   - Comparison of arrest procedures")
-    
-    print("\nCommands:")
-    print("  help  - Show this help message")
-    print("  quit  - Exit the system")
+    print("\n⌨️  Commands:")
+    print("    help   - Show this help")
+    print("    reset  - Clear conversation history")
+    print("    quit   - Exit program")
     print("="*70 + "\n")
 
+
+def display_initial_setup():
+    """Show vectorstore setup options."""
+    print("VECTORSTORE SETUP")
+    print("-" * 70)
+    
+    if os.path.exists("legal_vectorstore"):
+        print("✓ Found existing vectorstore")
+        print("\nOptions:")
+        print("  1. Use existing vectorstore (instant, recommended)")
+        print("  2. Rebuild with PDFs from documents/ folder")
+        
+        choice = input("\nChoice (1 or 2): ").strip()
+        return choice == "2"
+    else:
+        print("⚠ No vectorstore found - first time setup\n")
+        auto_pdf = os.path.exists("documents") and list(Path("documents").glob("*.pdf"))
+        
+        if auto_pdf:
+            print(f"Found {len(auto_pdf)} PDF(s) in documents/ folder")
+            use_them = input("Create embeddings from these PDFs? (y/n): ").strip().lower()
+            return use_them == 'y'
+        else:
+            print("No PDFs found in documents/ folder")
+            return False
+
+
 def main():
-    """Main interactive loop"""
+    """Main interactive loop."""
     print_banner()
     
-    # Initialize the RAG system
+    # Initialize RAG system
     print("Initializing Legal RAG System...")
-    rag = LegalRAGSystem()
+    try:
+        rag = LegalRAGSystem()
+    except ValueError as e:
+        print(f"✗ Error: {e}")
+        print("Please set GROQ_API_KEY in .env file")
+        sys.exit(1)
     
-    # Check if vectorstore already exists
-    if os.path.exists(rag.vectorstore_path):
-        print(f"\n✓ Found existing vectorstore at: {rag.vectorstore_path}")
-        rebuild = input("Rebuild vectorstore with new PDFs? (y/n): ").strip().lower()
-        
-        if rebuild == 'y':
-            # Get PDF paths and rebuild
-            pdf_paths = get_pdf_paths()
-            print(f"\n📄 Processing {len(pdf_paths)} PDF(s)...")
-            print("⏳ This may take 10-15 minutes for large PDFs...")
-            print("=" * 70 + "\n")
-            
-            rag.load_documents(pdf_paths)
+    # Handle vectorstore
+    should_rebuild = display_initial_setup()
+    
+    if should_rebuild:
+        pdf_paths = list(Path("documents").glob("*.pdf"))
+        if pdf_paths:
+            print(f"\n📄 Creating embeddings for {len(pdf_paths)} PDF(s)")
+            print("⏳ This may take 10-15 minutes (one-time process)...\n")
+            try:
+                rag.load_documents([str(p) for p in pdf_paths])
+            except Exception as e:
+                print(f"✗ Error loading documents: {e}")
+                sys.exit(1)
         else:
-            # Load existing vectorstore
-            print("Loading existing vectorstore...")
-            rag.load_vectorstore()
+            print("✗ No PDFs found in documents/ folder")
+            sys.exit(1)
     else:
-        # First time setup
-        print("\n⚠ No existing vectorstore found. First-time setup required.")
-        pdf_paths = get_pdf_paths()
-        
-        print(f"\n📄 Processing {len(pdf_paths)} PDF(s)...")
-        print("⏳ This may take 10-15 minutes for large PDFs...")
-        print("💡 Tip: This is a one-time process. Future runs will be instant!")
-        print("=" * 70 + "\n")
-        
-        rag.load_documents(pdf_paths)
+        print("Loading vectorstore...")
+        try:
+            rag.load_vectorstore()
+        except Exception as e:
+            print(f"✗ Error: {e}")
+            print("Please ensure documents are in legal_vectorstore/")
+            sys.exit(1)
     
     print("\n" + "="*70)
     print("✓ System Ready!")
     print("="*70)
-    print("Type 'help' for examples, or 'quit' to exit.")
+    print("Type 'help' for examples or questions directly")
     print("="*70 + "\n")
     
-    # Interactive query loop
+    # Interactive loop
     while True:
         try:
-            query = input("Your Question: ").strip()
+            question = input("📋 Your question (or 'quit'): ").strip()
             
-            if not query:
+            if not question:
                 continue
             
-            if query.lower() in ['quit', 'exit', 'q']:
-                print("\nThank you for using Legal RAG System. Goodbye!")
+            if question.lower() in ['quit', 'exit', 'q']:
+                print("\n✓ Thank you! Goodbye.")
                 break
             
-            if query.lower() in ['help', 'h', '?']:
+            if question.lower() in ['help', 'h', '?']:
                 display_help()
                 continue
             
-            # Process query
+            if question.lower() in ['reset']:
+                rag.reset_conversation()
+                print("✓ Conversation history cleared\n")
+                continue
+            
+            # Query RAG system
             print("\n🔍 Searching legal documents...")
-            result = rag.query(query)
+            result = rag.query(question)
+            
+            if result.get('error'):
+                print(f"\n✗ Error: {result['answer']}\n")
+                continue
             
             print("\n" + "-"*70)
-            print("ANSWER:")
+            print("📌 ANSWER:")
             print("-"*70)
             print(result['answer'])
             
-            # Show sources if available
+            # Show sources
             if result.get('sources'):
-                print("\n" + "-"*70)
-                print("RELEVANT SOURCES:")
-                print("-"*70)
-                for i, source in enumerate(result['sources'][:3], 1):  # Show top 3
-                    print(f"\n{i}. {source}")
+                print("\n📚 Sources:")
+                for i, src in enumerate(result['sources'][:3], 1):
+                    print(f"  {i}. {src['document']} (Page {src['page']})")
             
-            print("\n" + "="*70 + "\n")
+            # Show metadata
+            if result.get('is_followup'):
+                print("\n💡 (Using conversation context)")
             
+            print()
+        
         except KeyboardInterrupt:
-            print("\n\nInterrupted. Type 'quit' to exit properly.")
+            print("\n\nUse 'quit' to exit properly.\n")
         except Exception as e:
-            print(f"\n✗ Error: {str(e)}")
-            print("Please try rephrasing your question.\n")
+            print(f"\n✗ Error: {e}\n")
+
 
 if __name__ == "__main__":
     try:
         main()
-    except KeyboardInterrupt:
-        print("\n\nExiting...")
     except Exception as e:
-        print(f"\n✗ Fatal error: {str(e)}")
-        print("Please check your setup and try again.")
+        print(f"\n✗ Fatal error: {e}")
+        sys.exit(1)
